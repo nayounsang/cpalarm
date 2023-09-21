@@ -1,7 +1,13 @@
 export interface contestType{
-    name:string,
-    time:string,
+    start:string,
+    end:string,
+    url:string,
     checked:boolean,
+
+}
+
+export type contestTableType = {
+    [key:string]:contestType;
 }
 
 export interface timeCheckType{
@@ -9,8 +15,3 @@ export interface timeCheckType{
     time:string,
 }
 
-export interface dataType{
-    boj:contestType[],
-    cf:contestType[],
-    time:timeCheckType[],
-}
