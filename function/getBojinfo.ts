@@ -1,4 +1,4 @@
-import { contestTableType, contestType } from "./../type/contestType";
+import { contestTableType, contestType } from "../type/type";
 import { CheerioAPI } from "cheerio";
 import getHtml, { getHtmlWithAttr } from "./getHtml";
 import {
@@ -36,7 +36,7 @@ const getBojInfo = async (): Promise<contestTableType> => {
     bojSelector + bojContestTitle,
     "href"
   );
-  
+
 
   const result = title.reduce((obj, key: string, index: number):contestType => {
     obj[key] = {

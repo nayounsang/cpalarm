@@ -8,7 +8,7 @@ interface proptype {
 
 const ContestTitle = ({ title }: proptype) => {
   const [text, setText] = useState("");
-  const cut = 35;
+  const cut = 33;
 
   useEffect(() => {
     if (title.length > cut) {
