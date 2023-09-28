@@ -1,15 +1,19 @@
-import { contestTableType, contestType } from "../type/type";
+import {
+  contestTableType,
+  contestType,
+  timeTableType,
+  timeTitle,
+  timeType,
+} from "../type/type";
 import getBojInfo from "./getBojinfo";
-import { initJSONFile, loadJSONFile } from "./handlesJson";
-import { bojJSONPath, timeJSONPath } from "../const/path";
+import { loadJSONFile, saveJSONFile } from "./handlesJson";
 
 const adjustContest = async (oj: string): Promise<contestTableType> => {
-  // oj(cf,boj)에서 새로 얻어온 데이터
-  let result:contestTableType = {};
-  let prev:contestTableType = {};
+  let result: contestTableType = {};
+  let prev: contestTableType = {};
   if (oj === "백준") {
     result = await getBojInfo();
-    prev = JSON.parse(await loadJSONFile(bojJSONPath, {}));
+    prev = await loadJSONFile<contestTableType>(oj, {});
   } else if (oj === "코드포스") {
     result = {};
     prev = {};
@@ -19,15 +23,32 @@ const adjustContest = async (oj: string): Promise<contestTableType> => {
   }
   for (const key in result) {
     if (prev.hasOwnProperty(key)) {
-      result[key as keyof contestTableType] = { ...prev[key as keyof contestTableType] };
+      result[key as keyof contestTableType] = {
+        ...prev[key as keyof contestTableType],
+      };
     }
   }
   return result;
 };
 
-const initData = async () => {
-  await initJSONFile(bojJSONPath, {});
-  await initJSONFile(timeJSONPath, {});
+const getOriginTime = (): timeTableType => {
+  const result: timeTableType = {};
+  for (const key of Object.keys(timeTitle)) {
+    result[key as keyof timeTableType] = {
+      title: timeTitle[key],
+      checked: false,
+    };
+  }
+  return result;
 };
 
-export { adjustContest, initData };
+const initData = async () => {
+  await saveJSONFile("백준", {});
+  await saveJSONFile("시간",getOriginTime());
+};
+
+const adjustTime = async (): Promise<timeTableType> => {
+  return await loadJSONFile<timeTableType>("시간", getOriginTime());
+};
+
+export { adjustContest, initData,adjustTime };

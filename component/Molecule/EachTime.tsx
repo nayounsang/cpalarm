@@ -1,43 +1,41 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import ContestTitle from "../Atom/ConstestTitle";
 import { ListItem } from "@rneui/themed";
-import { contestTableType } from "../../type/type";
-import {
-  getContestState,
-  setContestState,
-} from "../../function/stateFunc";
+import { timeTableType } from "../../type/type";
+import { getTimeState, setTimeState } from "../../function/stateFunc";
+import TimeTitle from "../Atom/TimeTitle";
 
 interface proptype {
   title: string;
 
-  setData: React.Dispatch<React.SetStateAction<contestTableType>>;
-  data: contestTableType;
+  setData: React.Dispatch<React.SetStateAction<timeTableType>>;
+  data: timeTableType;
 }
 
-const EachContest = ({ title, data, setData }: proptype) => {
+const EachTime = ({ title, data, setData }: proptype) => {
   const toggleCheckBox = () => {
     setData(
-      setContestState(
+      setTimeState(
         data,
         title,
         "checked",
-        !getContestState(data, title, "checked")
+        !getTimeState(data, title, "checked")
       )
     );
   };
+
 
   return (
     <ListItem bottomDivider>
       <ListItem.CheckBox
         onPress={toggleCheckBox}
-        checked={getContestState(data, title, "checked")}
+        checked={getTimeState(data, title, "checked")}
         iconType="material-community"
         checkedIcon="checkbox-outline"
         uncheckedIcon={"checkbox-blank-outline"}
       />
       <ListItem.Content>
-        <ContestTitle title={title} />
+        <TimeTitle title={data[title]["title"]} />
       </ListItem.Content>
     </ListItem>
   );
@@ -45,4 +43,4 @@ const EachContest = ({ title, data, setData }: proptype) => {
 
 const styles = StyleSheet.create({});
 
-export default EachContest;
+export default EachTime;

@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { contestTableType, contestType } from "../../type/type";
+import { contestTableType } from "../../type/type";
 import EachContest from "../Molecule/EachContest";
 
 interface proptype {
