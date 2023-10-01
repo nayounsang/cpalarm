@@ -5,6 +5,7 @@ import { Alert, View } from "react-native";
 import SaveUndo from "../Molecule/SaveUndo";
 import { loadJSONFile, saveJSONFile } from "../../function/handlesJson";
 import TimeTable from "../Organism/TimeTable";
+import adjustNotification from "../../function/notificationFunc";
 
 interface proptype {
   title: string;
@@ -21,8 +22,9 @@ const ShowTime = ({ title, data, setData }: proptype) => {
     ]);
   };
 
-  const handlePressSave = () => {
-    saveJSONFile(title, data);
+  const handlePressSave = async () => {
+    await saveJSONFile(title, data);
+    await adjustNotification();
     Alert.alert("저장하기완료", "기기에 데이터를 저장했습니다.", [
       { text: "닫기" },
     ]);

@@ -12,7 +12,7 @@ const SaveUndo = ({ onPressSave, onPressRedo }: proptype) => {
     <View
       style={{
         width: "100%",
-        marginTop: 30,
+        marginVertical: 30,
         paddingHorizontal: 15,
         display: "flex",
         flexDirection: "row-reverse",

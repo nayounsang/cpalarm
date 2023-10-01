@@ -44,11 +44,11 @@ const getOriginTime = (): timeTableType => {
 
 const initData = async () => {
   await saveJSONFile("백준", {});
-  await saveJSONFile("시간",getOriginTime());
+  await saveJSONFile("시간", getOriginTime());
 };
 
 const adjustTime = async (): Promise<timeTableType> => {
   return await loadJSONFile<timeTableType>("시간", getOriginTime());
 };
 
-export { adjustContest, initData,adjustTime };
+export { adjustContest, initData, adjustTime };
