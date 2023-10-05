@@ -22,7 +22,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.nayounsang.BojAlarm"
+      "package": "com.nayounsang.BojAlarm",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
